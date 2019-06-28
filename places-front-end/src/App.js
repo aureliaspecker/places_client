@@ -1,28 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Home from './Home';
 import { getPlaces } from './services/placesApi';
 
-function App() {
-  getPlaces()
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+
+  constructor (props) {
+    super(props)
+    this.state = { places:[]}
+  }
+  
+  componentWillMount () {
+    getPlaces().then(
+      places => {
+        console.log(places)
+        this.setState({
+          places
+        }) 
+      }
+    )
+  }
+
+  render () {
+
+
+    return (
+      <div className="App">
+        <Home places={this.state.places}/> 
+      </div>
+    );
+  }
+
 }
 
 export default App;
+
+// next: make it refresh every x seconds / style it / etc.

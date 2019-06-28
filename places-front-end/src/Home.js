@@ -1,33 +1,12 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Header from './Header';
+import ShowPlaces from './ShowPlaces';
 
-     
-function Header() {
-  return(
-    <header className="Home-header">
-      <p>
-        Places Page
-      </p>
-    </header>
-  )
-}
-
-function Content() {
-  return(
-    <section className="Content">
-      <p>
-        Welcome!
-      </p>
-    </section>
-  )
-}
-
-function Home() {
+function Home(props) {
   return (
     <div>
-    < Header />
-    < Content />
+      <Header title="A day in London"/>
+      <ShowPlaces places={props.places}/>
     </div>
   );
 }
