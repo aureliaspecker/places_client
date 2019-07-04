@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import WebMap from './WebMap';
+
 
 function Place(props) {
 
   return (
-    <div>
+    <div style = {props.style}>
       {props.text}
-      <div>
-        <WebMap />
+      <div id="container">
       </div>
     </div>
 

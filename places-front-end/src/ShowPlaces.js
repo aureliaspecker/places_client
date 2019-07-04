@@ -1,19 +1,36 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Place from './Place';
+import WebMap from './WebMap';
 
+class ShowPlaces extends React.Component {
 
-function ShowPlaces(props) {
-  
-  const placesComponents = props.places.filter(place => (
+  constructor(props) {
+    super(props)
+    this.state = {selected:undefined}
+  }
+
+  onSelect = (selectedPlace) => {
+    this.setState({selected: selectedPlace._id})
+  }
+
+  render() {
+
+  const filteredPlaces = this.props.places.filter(place => (
     !!place.location && !!place.location.latitude && !!place.location.longitude
-  )).map(place => (
-    <Place key={place._id} text={place.name} lat={place.location.latitude} lng={place.location.longitude}/>
-  )); 
+  ))
+  
+  const placesComponents = filteredPlaces.map(place => {
+    const colour = place._id === this.state.selected ? '#33cc99': '#ff0000';
+    return(
+    <Place style={{color: colour}} key={place._id} text={place.name} lat={place.location.latitude} lng={place.location.longitude}/>
+    )
+  }); 
   
   return (
     
       <div>
+        <WebMap places={filteredPlaces} onSelect={(this.onSelect)}/>
         {placesComponents}
       </div> 
 
@@ -21,6 +38,7 @@ function ShowPlaces(props) {
 
     );
   }
+}
   
   ShowPlaces.propTypes = {
     places: PropTypes.arrayOf(PropTypes.shape({
