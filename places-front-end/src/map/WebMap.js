@@ -4,21 +4,20 @@ import { Box, Card } from 'gestalt';
 import 'gestalt/dist/gestalt.css';
 
 const WebMap = props => (  
-    <Box maxWidth={props.maxWidth} padding={2} column={12}>
-        <Card>
+    // <Box maxWidth={props.maxWidth} padding={2} column={12}>
+    //     <Card>
           <Map 
           onClick={props.onClick}
           center={props.center} 
           defaultZoom={props.defaultZoom} 
           width={props.width} 
-          height={props.height} 
-          metaWheelZoom={true} 
-          mouseEvents={true} 
-          touchEvents={true}> 
+          height={props.height}
+          onBoundsChanged={props.onBoundsChanged} 
+          > 
             {props.children}
           </Map>
-        </Card>
-      </Box>
+      //   </Card>
+      // </Box>
 )
 
 WebMap.defaultProps = {
